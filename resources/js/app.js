@@ -7,12 +7,24 @@
 
 require('./bootstrap');
 
-window.Vue = require('vue');
-
+//引入vue
+import Vue from 'vue';
 //引入 element-ui
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
+import 'font-awesome/css/font-awesome.min.css';
 Vue.use(ElementUI);
+
+//路由
+import VueRouter from 'vue-router';
+import routes from './routes';
+Vue.use(VueRouter);
+const router = new VueRouter({
+  routes
+});
+
+// disable message
+Vue.config.productionTip = false
 
 /**
  * The following block of code may be used to automatically register your
@@ -22,7 +34,7 @@ Vue.use(ElementUI);
  * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
  */
 
-Vue.component('example-component', require('./components/ExampleComponent.vue'));
+//Vue.component('example-component', require('./components/ExampleComponent.vue'));
 
 // const files = require.context('./', true, /\.vue$/i)
 
@@ -35,7 +47,9 @@ Vue.component('example-component', require('./components/ExampleComponent.vue'))
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
-
-const app = new Vue({
-    el: '#app'
-});
+var component = require('./views/App.vue');
+component.router = router;
+new Vue(component).$mount('#main');
+/*const vm = new Vue({
+    router
+}).$mount('#app');*/
