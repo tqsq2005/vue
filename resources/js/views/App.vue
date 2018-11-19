@@ -8,7 +8,9 @@
                     <navbar></navbar>
                 </el-aside>
                 <!--内容区域-->
-                <router-view></router-view>
+                <el-main>
+                    <router-view></router-view>
+                </el-main>
             </el-container>
         </transition>
 

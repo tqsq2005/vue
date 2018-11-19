@@ -1,13 +1,29 @@
 <template>
-    <div id="index">
-        显示菜单列表信息
+    <div class="panel panel-default">
+        <div class="panel-heading">菜单列表</div>
+        <ul class="list-group">
+            <li class="list-group-item"
+                v-for="row in lists">
+                <span class="label label-success" v-if="row.status">正常</span>
+                {{ row.name }}
+                <span class="pull-right">{{ row.desc }}</span>
+            </li>
+        </ul>
     </div>
 </template>
 
 <script>
   // 组件的所有代码都在这里
+  import { mapState, mapActions } from 'vuex';
+
   export default {
-    name: 'demo',
+    name: 'menuList',
+    computed: mapState({
+      lists: state => state.menus.lists
+    }),
+    created() {
+      this.getMenuLists();
+    },
     data() {
       return {
         msg: 'Welcome to Your Vue.js App'
@@ -15,10 +31,11 @@
     },
     methods: {
       //组件内的方法
+      ...mapActions([
+        'getMenuLists'
+      ]),
     },
-    computed: {
-      //计算属性
-    },
+
     mounted() {
       //元素装载完后执行的动作
       //this.(function () {

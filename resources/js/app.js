@@ -49,6 +49,11 @@ Vue.config.productionTip = false
  */
 var component = require('./views/App.vue');
 component.router = router;
+//引入状态管理
+import store from './store/';
+component.store = store;
+
+//创建实例
 new Vue(component).$mount('#main');
 /*const vm = new Vue({
     router
