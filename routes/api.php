@@ -18,8 +18,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::group(['middleware' => 'api'], function () {
-    Route::resource('news', 'NewsController');
+    Route::apiResource('news', 'NewsController');
     //菜单
-    Route::resource('menus', 'MenusController');
+    Route::apiResource('menus', 'MenusController');
 });
 
