@@ -12,6 +12,9 @@
 <div id="app">
 </div>
 
-<script src="{{ mix('/js/main.js') }}"></script>
+{{-- Vue --}}
+<script src="{{ mix('/client/js/manifest.js') }}" type="text/javascript" charset="utf-8"></script>
+<script src="{{ mix('/client/js/vendor.js') }}" type="text/javascript" charset="utf-8"></script>
+<script src="{{ mix('/client/js/app.js') }}" type="text/javascript" charset="utf-8"></script>
 </body>
 </html>

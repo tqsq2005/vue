@@ -4,7 +4,8 @@ import VueRouter from 'vue-router';
 Vue.use(VueRouter);
 
 const routes = [
-
+  { path: '/', redirect: 'index' },
+  { path: '/index', component: require('@/views/login/index.vue') },
 ];
 
 export default new VueRouter({

@@ -40,18 +40,31 @@ import 'font-awesome/css/font-awesome.min.css';
 Vue.use(ElementUI);
 
 /**
+ * register global utility filters.
+ */
+import * as filters from './filters';
+Object.keys(filters).forEach(key => {
+  Vue.filter(key, filters[key]);
+});
+
+/**
  * register vue components
  */
 
-Vue.component('event-hub', require('./components/EventHub.vue'))
+//Vue.component('event-hub', require('./components/EventHub.vue'))
 
 //路由
-import VueRouter from 'vue-router';
-import routes from './routes';
-Vue.use(VueRouter);
-const router = new VueRouter({
-  routes
-});
+import router from './routes';
+
+import App from './App.vue';
+import store from './store';
 
 // disable message
 Vue.config.productionTip = false
+
+new Vue({
+  el: '#app',
+  router,
+  store,
+  render: h => h(App)
+})
