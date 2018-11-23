@@ -11,8 +11,8 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/app.js', 'public/js')
-   .sass('resources/sass/app.scss', 'public/css');
+/*mix.js('resources/js/app.js', 'public/js')
+   .sass('resources/sass/app.scss', 'public/css');*/
 
 mix.js('resources/client/assets/js/app.js', 'public/client/js')
   //.sass('resources/client/assets/sass/app.scss', 'public/client/css')
@@ -33,6 +33,26 @@ mix.webpackConfig({
       '@': __dirname + '/resources/client/assets/js'
     },
   },
+  output: {
+    chunkFilename: 'chunks/[name].[chunkhash].js',
+    publicPath: '/',
+  },
+});
+
+Mix.listen('configReady', (webpackConfig) => {
+  // Create SVG sprites  resources\client\assets\js\icons\svg
+  webpackConfig.module.rules.unshift({
+    test: /\.svg$/,
+    loader: 'svg-sprite-loader',
+    include: /(resources\/client\/assets\/js\/icons\/svg)/,
+    options: {
+      symbolId: 'icon-[name]',
+    }
+  });
+
+  // Exclude 'svg' folder from font loader
+  let fontLoaderConfig = webpackConfig.module.rules.find(rule => String(rule.test) === String(/(\.(woff2?|ttf|eot|otf)$|font.*\.svg$)/));
+  fontLoaderConfig.exclude = /(resources\/client\/assets\/js\/icons\/svg)/;
 });
 
 mix.browserSync({
