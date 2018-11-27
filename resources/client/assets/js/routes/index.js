@@ -25,37 +25,37 @@ import Layout from '@/views/layout/Layout';
   }
  **/
 export const constantRouterMap = [
-  /*{
+  {
     path: '/redirect',
     component: Layout,
     hidden: true,
     children: [
       {
         path: '/redirect/:path*',
-        component: () => import('@/views/redirect/index.vue')
+        component: () => import('@/views/redirect/index')
       }
     ]
-  },*/
+  },
   {
     path: '/login',
     component: () => import('@/views/login/index'),
     hidden: true
   },
-  /*{
+  {
     path: '/auth-redirect',
     component: () => import('@/views/login/authredirect'),
     hidden: true
-  },*/
+  },
   {
     path: '/404',
-    component: () => import('@/views/errorPage/404.vue'),
+    component: () => import('@/views/errorPage/404'),
     hidden: true
   },
   {
     path: '/401',
-    component: () => import('@/views/errorPage/401.vue'),
+    component: () => import('@/views/errorPage/401'),
     hidden: true
-  },/*
+  },
   {
     path: '',
     component: Layout,
@@ -63,12 +63,12 @@ export const constantRouterMap = [
     children: [
       {
         path: 'dashboard',
-        component: () => import('@/views/dashboard/index'),
+        component: () => import('@/views/dashboard/test'),
         name: 'Dashboard',
         meta: { title: 'dashboard', icon: 'dashboard', noCache: true }
       }
     ]
-  },*/
+  },
   {
     path: '/documentation',
     component: Layout,
@@ -103,9 +103,10 @@ export const constantRouterMap = [
   routes: constantRouterMap
 })*/
 
+/*
 const routes = [
-  /*{ path: '/', redirect: 'index' },
-  { path: '/index', component: require('@/views/login/index.vue') },*/
+  /!*{ path: '/', redirect: 'index' },
+  { path: '/index', component: require('@/views/login/index.vue') },*!/
   {
     path: '',
     component: Layout,
@@ -120,9 +121,65 @@ const routes = [
     ]
   },
 ];
+*/
 
 export default new VueRouter({
   //mode: 'history',//HTML5 History 模式
   base: '/admin',//应用的基路径
+  scrollBehavior: () => ({ y: 0 }),
   routes: constantRouterMap,
 });
+
+export const asyncRouterMap = [
+  {
+    path: '/icon',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/svg-icons/index'),
+        name: 'Icons',
+        meta: { title: 'icons', icon: 'icon', noCache: true }
+      }
+    ]
+  },
+
+  {
+    path: '/error',
+    component: Layout,
+    redirect: 'noredirect',
+    name: 'ErrorPages',
+    meta: {
+      title: 'errorPages',
+      icon: '404'
+    },
+    children: [
+      {
+        path: '401',
+        component: () => import('@/views/errorPage/401'),
+        name: 'Page401',
+        meta: { title: 'page401', noCache: true }
+      },
+      {
+        path: '404',
+        component: () => import('@/views/errorPage/404'),
+        name: 'Page404',
+        meta: { title: 'page404', noCache: true }
+      }
+    ]
+  },
+
+  {
+    path: '/error-log',
+    component: Layout,
+    redirect: 'noredirect',
+    children: [
+      {
+        path: 'log',
+        component: () => import('@/views/errorLog/index'),
+        name: 'ErrorLog',
+        meta: { title: 'errorLog', icon: 'bug' }
+      }
+    ]
+  }
+];

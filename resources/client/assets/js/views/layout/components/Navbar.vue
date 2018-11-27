@@ -59,11 +59,6 @@ import LangSelect from '@/components/LangSelect'
 import ThemePicker from '@/components/ThemePicker'
 
 export default {
-  data() {
-    return {
-      avatar: 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif',
-    };
-  },
   components: {
     Breadcrumb,
     Hamburger,
@@ -76,8 +71,8 @@ export default {
   computed: {
     ...mapGetters([
       'sidebar',
-      //'name',
-      //'avatar',
+      'name',
+      'avatar',
       'device'
     ])
   },

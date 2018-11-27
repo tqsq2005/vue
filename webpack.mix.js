@@ -39,21 +39,23 @@ mix.webpackConfig({
   },
 });
 
+/*
 Mix.listen('configReady', (webpackConfig) => {
   // Create SVG sprites  resources\client\assets\js\icons\svg
   webpackConfig.module.rules.unshift({
     test: /\.svg$/,
     loader: 'svg-sprite-loader',
-    include: /(resources\/client\/assets\/js\/icons\/svg)/,
+    include: /(client\/assets\/js\/icons\/svg)/,
     options: {
       symbolId: 'icon-[name]',
     }
   });
 
   // Exclude 'svg' folder from font loader
-  let fontLoaderConfig = webpackConfig.module.rules.find(rule => String(rule.test) === String(/(\.(woff2?|ttf|eot|otf)$|font.*\.svg$)/));
-  fontLoaderConfig.exclude = /(resources\/client\/assets\/js\/icons\/svg)/;
+  //let fontLoaderConfig = webpackConfig.module.rules.find(rule => String(rule.test) === String(/(\.(woff2?|ttf|eot|otf)$|font.*\.svg$)/));
+  //fontLoaderConfig.exclude = /(client\/assets\/js\/icons\/svg)/;
 });
+*/
 
 mix.browserSync({
   proxy: 'localhost:8085'

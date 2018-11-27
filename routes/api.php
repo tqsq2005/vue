@@ -13,11 +13,19 @@ use Illuminate\Http\Request;
 |
 */
 
+/*Route::middleware('auth:api')->get('/user', function (Request $request) {
+    return $request->user();
+});*/
+
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
 Route::group(['middleware' => 'api'], function () {
+    //用户
+    Route::apiResource('users', 'UsersController');
+    Route::post('users/login', 'UsersController@login');
+    //新闻
     Route::apiResource('news', 'NewsController');
     //菜单
     Route::apiResource('menus', 'MenusController');
